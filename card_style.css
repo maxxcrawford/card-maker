@@ -1,0 +1,16 @@
+h3 {
+    color: green;
+}
+
+.name {
+    color: red;
+}
+
+.topic {
+    color: blue;
+}
+
+.card-body {
+    background-color: #fff;
+    padding: 15px 10px;
+}
