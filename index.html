@@ -1,111 +1,63 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Card Maker</title>
+<!DOCTYPE html>
+<html>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="utf-8">
+		<title>200ok Speaker Template</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/normalize.min.css">
+		<link rel="stylesheet" href="css/page-style.css">
+	</head>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/normalize.min.css">
-    <style>
-        .background {
-            background-color: #ccc;
-        }
-
-        .row-canvas {
-            display: none;
-        }
-
-        .row-card, .row-save {
-            padding-top: 20px;
-        }
-
-        #card-display {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            box-sizing: border-box;
-            height: 450px;
-            width: 800px;
-        }
-
-        .card-body {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-</head>
-<body class="background">
-    <div class="container">
-        <div class="row row-canvas">
-            <div class="small-12 columns">
-                <canvas id="canvas" width="800" height="450"></canvas>
-            </div>
+	<body>
+        <canvas id="canvas" width="800" height="450"></canvas>
+        <div class="title-wrapper">
+            <h1>200ok Speaker Card Maker</h1>
         </div>
-        <div class="row row-card">
-            <div class="small-12 columns section-card">
-
-                <div id="card-wrapper">
-                    <div id="card-display">
-                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
-                        <link rel="stylesheet" href="card_style.css">
-
-                        <div class="card-body">
-                            <h3 class="name">Hello, {{ name }}</h3>
-                            <p class="topic">{{ topic }}</p>
-                            <img v-bind:src="image_url" alt="">
-                        </div>
-                    </div>
-
-                    <form>
-                        <label>Name</label>
-                        <input type="text" v-model="name">
-
-                        <label>Topic</label>
-                        <textarea v-model="topic"></textarea>
-
-                        <label>Image URL</label>
-                        <input type="text" v-model="image_url">
-                    </form>
-                </div>
-
-            </div>
+		<div id="card-wrapper">
+    		<div id="card-display" class="">
+                <link rel="stylesheet" href="css/card-style.css">
+    			<div class="card speaker">
+        			<div class="photo-wrapper">
+        				<div class="photo">
+        					<!-- Replace image here  -->
+        					<img v-bind:src="image_url" alt="">
+        				</div>
+        			</div>
+        			<div class="content-wrapper ">
+        				<img class="logo" src='images/logo.svg' />
+        				<div class="speaker-content-wrapper">
+        					<div class="speaker-content">
+        						<div class="subhead">Come Hear</div>
+        						<!-- Speaker Name -->
+        						<div class="headline">{{ name }}</div>
+        						<div class="subhead">Speak About</div>
+        						<!-- Talk Name -->
+        						<div class="headline red">{{ topic }}</div>
+        					</div>
+        				</div>
+        				<div class="date">June 2, 2017 <span>Tulsa, OK</span></div>
+        			</div>
+    			</div>
+                <!-- Form -->
+    			<form>
+    				<label>Speaker Name</label>
+    				<input type="text" v-model="name" placeholder="John Smith">
+    				<label>Speaker Topic</label>
+                    <input v-model="topic" type="text" placeholder="Hello World!">
+    				<label>Image URL</label>
+    				<input type="text" v-model="image_url" placeholder="http://placehold.it/270x400.jpg">
+    			</form>
+    		</div>
+		</div>
+        <!-- Results-->
+        <div class="download-wrapper">
+            <a id="download" download="card.png" class="button">Generate Image</a>
         </div>
-        <div class="row row-editor">
-            <div class="small-12 columns section-editor">
-                <a id="download" download="card.png" class="button small">Download</a>
-            </div>
-        </div>
-    </div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/rasterizehtml/1.2.4/rasterizeHTML.allinone.js" charset="utf-8"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+	</body>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rasterizehtml/1.2.4/rasterizeHTML.allinone.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.0/vue.min.js" charset="utf-8"></script>
-    <script type="text/javascript">
-        var canvas = document.getElementById("canvas");
-        var downloadLnk = document.getElementById('download');
-
-        var card_preview = new Vue({
-            el: '#card-wrapper',
-            data: {
-                image_url: '',
-                name: '',
-                topic: ''
-            }
-        });
-
-        function preview() {
-            var html_container = document.getElementById("card-display"),
-                html = html_container.innerHTML;
-
-            rasterizeHTML.drawHTML(html, canvas, {
-                executeJs: true
-            }).then(function success(renderResult) {
-                var dt = canvas.toDataURL();
-                location = dt;
-            });
-        }
-
-        downloadLnk.addEventListener('click', preview, false);
-    </script>
-</body>
 </html>
