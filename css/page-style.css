@@ -66,4 +66,26 @@ form label {
 	display: inline-block;
 	background: #e74141;
 	color: #ffffff;
+	transition: background 0.2s ease-out;
+	cursor: pointer;
+}
+
+.button:hover {
+	background: #4580c3;
+}
+
+.btn {
+	display: block;
+	max-width: 300px;
+	padding: 1em 0;
+	margin: 0 auto 2em;
+	background: #e74141;
+	color: #FFFFFF;
+	text-align: center;
+	text-decoration: none;
+	transition: background 0.2s ease-out;
+}
+
+.btn:hover {
+	background: #4580c3;
 }
